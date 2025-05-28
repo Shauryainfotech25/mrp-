@@ -152,6 +152,23 @@ For external integrations, configure API access:
 2. Set up webhook endpoints for real-time updates
 3. Configure external system integrations
 
+### AI Service Configuration
+
+AI-powered features rely on external providers. Set the following environment
+variables so the platform can authenticate:
+
+1. `OPENAI_API_KEY` – OpenAI models
+2. `CLAUDE_API_KEY` – Anthropic Claude models
+3. `GEMINI_API_KEY` – Google Gemini models
+
+Example configuration:
+
+```bash
+export OPENAI_API_KEY=your-openai-key
+export CLAUDE_API_KEY=your-claude-key
+export GEMINI_API_KEY=your-gemini-key
+```
+
 ## Usage
 
 ### Creating Standard Requisitions
