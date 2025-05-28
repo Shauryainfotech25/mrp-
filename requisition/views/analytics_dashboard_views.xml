@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Analytics Dashboard Tree View -->
+    <record id="view_requisition_analytics_tree" model="ir.ui.view">
+        <field name="name">requisition.analytics.tree</field>
+        <field name="model">requisition.analytics</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <field name="period_start"/>
+                <field name="period_end"/>
+                <field name="department_id"/>
+                <field name="total_requisitions"/>
+                <field name="emergency_requisitions"/>
+                <field name="average_cycle_time"/>
+                <field name="average_approval_time"/>
+                <field name="total_cost"/>
+                <field name="cost_variance"/>
+                <field name="on_time_delivery_rate"/>
+                <field name="sla_compliance_rate"/>
+                <field name="supplier_performance_score"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Analytics Dashboard Form View -->
+    <record id="view_requisition_analytics_form" model="ir.ui.view">
+        <field name="name">requisition.analytics.form</field>
+        <field name="model">requisition.analytics</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false" delete="false">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            Analytics Dashboard - <field name="period_start"/> to <field name="period_end"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="department_id"/>
+                            <field name="work_center_id"/>
+                            <field name="period_start"/>
+                            <field name="period_end"/>
+                        </group>
+                        <group>
+                            <field name="last_updated" readonly="1"/>
+                            <field name="data_quality_score" readonly="1"/>
+                            <field name="refresh_frequency" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Volume Metrics" name="volume">
+                            <group>
+                                <group string="Requisition Counts">
+                                    <field name="total_requisitions" readonly="1"/>
+                                    <field name="emergency_requisitions" readonly="1"/>
+                                    <field name="urgent_requisitions" readonly="1"/>
+                                    <field name="normal_requisitions" readonly="1"/>
+                                    <field name="completed_requisitions" readonly="1"/>
+                                    <field name="cancelled_requisitions" readonly="1"/>
+                                </group>
+                                <group string="Approval Metrics">
+                                    <field name="pending_approvals" readonly="1"/>
+                                    <field name="approved_requisitions" readonly="1"/>
+                                    <field name="rejected_requisitions" readonly="1"/>
+                                    <field name="auto_approved_count" readonly="1"/>
+                                    <field name="escalated_requisitions" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Time Metrics" name="time">
+                            <group>
+                                <group string="Cycle Times">
+                                    <field name="average_cycle_time" readonly="1"/>
+                                    <field name="median_cycle_time" readonly="1"/>
+                                    <field name="max_cycle_time" readonly="1"/>
+                                    <field name="min_cycle_time" readonly="1"/>
+                                </group>
+                                <group string="Process Times">
+                                    <field name="average_approval_time" readonly="1"/>
+                                    <field name="average_fulfillment_time" readonly="1"/>
+                                    <field name="average_delivery_time" readonly="1"/>
+                                    <field name="average_response_time" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Cost Analysis" name="cost">
+                            <group>
+                                <group string="Cost Metrics">
+                                    <field name="total_cost" readonly="1"/>
+                                    <field name="average_cost_per_requisition" readonly="1"/>
+                                    <field name="cost_variance" readonly="1"/>
+                                    <field name="budget_utilization" readonly="1"/>
+                                </group>
+                                <group string="Savings & Efficiency">
+                                    <field name="cost_savings_achieved" readonly="1"/>
+                                    <field name="emergency_cost_impact" readonly="1"/>
+                                    <field name="downtime_cost_prevented" readonly="1"/>
+                                    <field name="efficiency_improvement" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Performance KPIs" name="performance">
+                            <group>
+                                <group string="Delivery Performance">
+                                    <field name="on_time_delivery_rate" readonly="1"/>
+                                    <field name="delivery_accuracy_rate" readonly="1"/>
+                                    <field name="quality_acceptance_rate" readonly="1"/>
+                                    <field name="first_time_right_rate" readonly="1"/>
+                                </group>
+                                <group string="Service Levels">
+                                    <field name="sla_compliance_rate" readonly="1"/>
+                                    <field name="emergency_response_rate" readonly="1"/>
+                                    <field name="customer_satisfaction_score" readonly="1"/>
+                                    <field name="supplier_performance_score" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Trends &amp; Forecasts" name="trends">
+                            <group>
+                                <group string="Trend Analysis">
+                                    <field name="volume_trend" readonly="1"/>
+                                    <field name="cost_trend" readonly="1"/>
+                                    <field name="performance_trend" readonly="1"/>
+                                    <field name="quality_trend" readonly="1"/>
+                                </group>
+                                <group string="Forecasts">
+                                    <field name="demand_forecast" readonly="1"/>
+                                    <field name="cost_forecast" readonly="1"/>
+                                    <field name="capacity_forecast" readonly="1"/>
+                                    <field name="risk_forecast" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Alerts &amp; Issues" name="alerts">
+                            <group>
+                                <group string="Current Alerts">
+                                    <field name="overdue_requisitions" readonly="1"/>
+                                    <field name="sla_breaches" readonly="1"/>
+                                    <field name="budget_overruns" readonly="1"/>
+                                    <field name="quality_issues" readonly="1"/>
+                                </group>
+                                <group string="Risk Indicators">
+                                    <field name="high_risk_suppliers" readonly="1"/>
+                                    <field name="critical_shortages" readonly="1"/>
+                                    <field name="process_bottlenecks" readonly="1"/>
+                                    <field name="compliance_violations" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Analytics Dashboard Kanban View -->
+    <record id="view_requisition_analytics_kanban" model="ir.ui.view">
+        <field name="name">requisition.analytics.kanban</field>
+        <field name="model">requisition.analytics</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard" create="false" edit="false" delete="false">
+                <field name="department_id"/>
+                <field name="total_requisitions"/>
+                <field name="emergency_requisitions"/>
+                <field name="average_cycle_time"/>
+                <field name="total_cost"/>
+                <field name="on_time_delivery_rate"/>
+                <field name="sla_compliance_rate"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click o_kanban_dashboard">
+                            <div class="o_kanban_card_header">
+                                <div class="o_kanban_card_header_title">
+                                    <div class="o_primary">
+                                        <field name="department_id"/>
+                                    </div>
+                                    <div class="o_secondary">
+                                        <field name="period_start"/> - <field name="period_end"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="o_kanban_card_content">
+                                <div class="row">
+                                    <div class="col-6 o_kanban_primary_left">
+                                        <button class="btn btn-primary" name="action_view_requisitions" type="object">
+                                            <span class="o_value"><field name="total_requisitions"/></span>
+                                            <span class="o_label">Total Requisitions</span>
+                                        </button>
+                                    </div>
+                                    <div class="col-6 o_kanban_primary_right">
+                                        <button class="btn btn-warning" name="action_view_emergency" type="object">
+                                            <span class="o_value"><field name="emergency_requisitions"/></span>
+                                            <span class="o_label">Emergency</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-4">
+                                        <span class="o_value"><field name="average_cycle_time" widget="float_time"/></span>
+                                        <span class="o_label">Avg Cycle Time</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="o_value"><field name="total_cost" widget="monetary"/></span>
+                                        <span class="o_label">Total Cost</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="o_value"><field name="on_time_delivery_rate"/>%</span>
+                                        <span class="o_label">On-Time</span>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <div class="progress">
+                                            <div class="progress-bar" t-attf-style="width: #{record.sla_compliance_rate.value}%"/>
+                                        </div>
+                                        <span class="o_label">SLA Compliance: <field name="sla_compliance_rate"/>%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Analytics Dashboard Pivot View -->
+    <record id="view_requisition_analytics_pivot" model="ir.ui.view">
+        <field name="name">requisition.analytics.pivot</field>
+        <field name="model">requisition.analytics</field>
+        <field name="arch" type="xml">
+            <pivot string="Requisition Analytics">
+                <field name="department_id" type="row"/>
+                <field name="period_start" interval="month" type="col"/>
+                <field name="total_requisitions" type="measure"/>
+                <field name="total_cost" type="measure"/>
+                <field name="average_cycle_time" type="measure"/>
+                <field name="on_time_delivery_rate" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Analytics Dashboard Graph View -->
+    <record id="view_requisition_analytics_graph" model="ir.ui.view">
+        <field name="name">requisition.analytics.graph</field>
+        <field name="model">requisition.analytics</field>
+        <field name="arch" type="xml">
+            <graph string="Requisition Analytics" type="line">
+                <field name="period_start" interval="month"/>
+                <field name="total_requisitions" type="measure"/>
+                <field name="emergency_requisitions" type="measure"/>
+                <field name="total_cost" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Real-time Dashboard Action -->
+    <record id="action_realtime_dashboard" model="ir.actions.act_window">
+        <field name="name">Real-time Dashboard</field>
+        <field name="res_model">requisition.analytics</field>
+        <field name="view_mode">kanban,pivot,graph,tree,form</field>
+        <field name="domain">[('period_start', '&gt;=', (context_today() - datetime.timedelta(days=30)).strftime('%Y-%m-%d'))]</field>
+        <field name="context">{'search_default_current_period': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Welcome to the Manufacturing Requisitions Dashboard
+            </p>
+            <p>
+                Monitor key performance indicators, track trends, and analyze
+                requisition performance across your manufacturing operations.
+            </p>
+        </field>
+    </record>
+
+    <!-- KPI Dashboard Action -->
+    <record id="action_kpi_dashboard" model="ir.actions.act_window">
+        <field name="name">KPI Dashboard</field>
+        <field name="res_model">requisition.analytics</field>
+        <field name="view_mode">kanban,graph,pivot</field>
+        <field name="view_id" ref="view_requisition_analytics_kanban"/>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Performance Trends Action -->
+    <record id="action_performance_trends" model="ir.actions.act_window">
+        <field name="name">Performance Trends</field>
+        <field name="res_model">requisition.analytics</field>
+        <field name="view_mode">graph,pivot,tree</field>
+        <field name="view_id" ref="view_requisition_analytics_graph"/>
+        <field name="context">{'search_default_last_12_months': 1}</field>
+    </record>
+
+    <!-- Cost Analysis Action -->
+    <record id="action_cost_analysis" model="ir.actions.act_window">
+        <field name="name">Cost Analysis</field>
+        <field name="res_model">requisition.analytics</field>
+        <field name="view_mode">pivot,graph,tree</field>
+        <field name="context">{'group_by': ['department_id'], 'measures': ['total_cost', 'cost_variance', 'cost_savings_achieved']}</field>
+    </record>
+
+    <!-- Executive Summary Dashboard -->
+    <record id="view_executive_dashboard" model="ir.ui.view">
+        <field name="name">executive.dashboard</field>
+        <field name="model">requisition.analytics</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard o_executive_dashboard" create="false" edit="false" delete="false">
+                <field name="total_requisitions"/>
+                <field name="total_cost"/>
+                <field name="cost_savings_achieved"/>
+                <field name="on_time_delivery_rate"/>
+                <field name="sla_compliance_rate"/>
+                <field name="emergency_requisitions"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card o_executive_summary">
+                            <div class="o_kanban_card_header">
+                                <h3>Manufacturing Requisitions Executive Summary</h3>
+                            </div>
+                            <div class="o_kanban_card_content">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="o_metric_card o_metric_primary">
+                                            <div class="o_metric_value">
+                                                <field name="total_requisitions"/>
+                                            </div>
+                                            <div class="o_metric_label">Total Requisitions</div>
+                                            <div class="o_metric_trend">
+                                                <i class="fa fa-arrow-up text-success"/>
+                                                <span>+12% vs last month</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="o_metric_card o_metric_success">
+                                            <div class="o_metric_value">
+                                                <field name="total_cost" widget="monetary"/>
+                                            </div>
+                                            <div class="o_metric_label">Total Spend</div>
+                                            <div class="o_metric_trend">
+                                                <i class="fa fa-arrow-down text-success"/>
+                                                <span>-5% vs budget</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="o_metric_card o_metric_info">
+                                            <div class="o_metric_value">
+                                                <field name="cost_savings_achieved" widget="monetary"/>
+                                            </div>
+                                            <div class="o_metric_label">Cost Savings</div>
+                                            <div class="o_metric_trend">
+                                                <i class="fa fa-arrow-up text-success"/>
+                                                <span>+18% vs target</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-md-6">
+                                        <div class="o_kpi_card">
+                                            <div class="o_kpi_header">Service Level Performance</div>
+                                            <div class="o_kpi_content">
+                                                <div class="o_kpi_metric">
+                                                    <span class="o_kpi_value"><field name="on_time_delivery_rate"/>%</span>
+                                                    <span class="o_kpi_label">On-Time Delivery</span>
+                                                </div>
+                                                <div class="o_kpi_metric">
+                                                    <span class="o_kpi_value"><field name="sla_compliance_rate"/>%</span>
+                                                    <span class="o_kpi_label">SLA Compliance</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="o_kpi_card">
+                                            <div class="o_kpi_header">Emergency Response</div>
+                                            <div class="o_kpi_content">
+                                                <div class="o_kpi_metric">
+                                                    <span class="o_kpi_value"><field name="emergency_requisitions"/></span>
+                                                    <span class="o_kpi_label">Emergency Requests</span>
+                                                </div>
+                                                <div class="o_kpi_metric">
+                                                    <span class="o_kpi_value">4.2 min</span>
+                                                    <span class="o_kpi_label">Avg Response Time</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_executive_dashboard" model="ir.actions.act_window">
+        <field name="name">Executive Dashboard</field>
+        <field name="res_model">requisition.analytics</field>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="view_executive_dashboard"/>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_analytics" name="Analytics" parent="menu_manufacturing_requisitions_root" sequence="30"/>
+    
+    <menuitem id="menu_realtime_dashboard" name="Real-time Dashboard" parent="menu_analytics" action="action_realtime_dashboard" sequence="10"/>
+    
+    <menuitem id="menu_kpi_dashboard" name="KPI Dashboard" parent="menu_analytics" action="action_kpi_dashboard" sequence="20"/>
+    
+    <menuitem id="menu_executive_dashboard" name="Executive Summary" parent="menu_analytics" action="action_executive_dashboard" sequence="30"/>
+    
+    <menuitem id="menu_performance_trends" name="Performance Trends" parent="menu_analytics" action="action_performance_trends" sequence="40"/>
+    
+    <menuitem id="menu_cost_analysis" name="Cost Analysis" parent="menu_analytics" action="action_cost_analysis" sequence="50"/>
+
+</odoo> 

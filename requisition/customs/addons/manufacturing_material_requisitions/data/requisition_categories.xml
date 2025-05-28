@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Product Categories for Manufacturing Materials -->
+        <record id="categ_raw_materials" model="product.category">
+            <field name="name">Raw Materials</field>
+            <field name="parent_id" ref="product.product_category_all"/>
+        </record>
+        
+        <record id="categ_semi_finished" model="product.category">
+            <field name="name">Semi-Finished Goods</field>
+            <field name="parent_id" ref="product.product_category_all"/>
+        </record>
+        
+        <record id="categ_consumables" model="product.category">
+            <field name="name">Manufacturing Consumables</field>
+            <field name="parent_id" ref="product.product_category_all"/>
+        </record>
+        
+        <record id="categ_tooling" model="product.category">
+            <field name="name">Tooling & Equipment</field>
+            <field name="parent_id" ref="product.product_category_all"/>
+        </record>
+        
+        <record id="categ_maintenance" model="product.category">
+            <field name="name">Maintenance Materials</field>
+            <field name="parent_id" ref="product.product_category_all"/>
+        </record>
+        
+        <record id="categ_quality" model="product.category">
+            <field name="name">Quality Control Materials</field>
+            <field name="parent_id" ref="product.product_category_all"/>
+        </record>
+        
+        <record id="categ_safety" model="product.category">
+            <field name="name">Safety Equipment</field>
+            <field name="parent_id" ref="product.product_category_all"/>
+        </record>
+        
+        <record id="categ_spare_parts" model="product.category">
+            <field name="name">Spare Parts</field>
+            <field name="parent_id" ref="product.product_category_all"/>
+        </record>
+        
+        <!-- Default Requisition Templates -->
+        <record id="template_production_startup" model="manufacturing.requisition.template">
+            <field name="name">Production Line Startup</field>
+            <field name="description">Standard materials needed for production line startup</field>
+            <field name="requisition_type">production_material</field>
+        </record>
+        
+        <record id="template_maintenance_weekly" model="manufacturing.requisition.template">
+            <field name="name">Weekly Maintenance</field>
+            <field name="description">Standard materials for weekly maintenance routine</field>
+            <field name="requisition_type">maintenance_material</field>
+        </record>
+        
+        <record id="template_quality_inspection" model="manufacturing.requisition.template">
+            <field name="name">Quality Inspection Kit</field>
+            <field name="description">Standard materials for quality inspection</field>
+            <field name="requisition_type">quality_material</field>
+        </record>
+        
+        <record id="template_emergency_kit" model="manufacturing.requisition.template">
+            <field name="name">Emergency Repair Kit</field>
+            <field name="description">Emergency materials for urgent repairs</field>
+            <field name="requisition_type">maintenance_material</field>
+        </record>
+        
+        <!-- Default Approval Workflows -->
+        <record id="workflow_standard" model="manufacturing.approval.workflow">
+            <field name="name">Standard Approval Workflow</field>
+            <field name="description">Standard 4-level approval workflow</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="workflow_emergency" model="manufacturing.approval.workflow">
+            <field name="name">Emergency Approval Workflow</field>
+            <field name="description">Fast-track approval for emergency requisitions</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="workflow_high_value" model="manufacturing.approval.workflow">
+            <field name="name">High Value Approval Workflow</field>
+            <field name="description">Extended approval workflow for high-value requisitions</field>
+            <field name="active">True</field>
+        </record>
+        
+        <!-- Default Budget Categories -->
+        <record id="budget_category_production" model="manufacturing.budget.category">
+            <field name="name">Production Materials</field>
+            <field name="code">PROD</field>
+            <field name="description">Budget for production materials and consumables</field>
+        </record>
+        
+        <record id="budget_category_maintenance" model="manufacturing.budget.category">
+            <field name="name">Maintenance & Repairs</field>
+            <field name="code">MAINT</field>
+            <field name="description">Budget for maintenance materials and repairs</field>
+        </record>
+        
+        <record id="budget_category_tooling" model="manufacturing.budget.category">
+            <field name="name">Tooling & Equipment</field>
+            <field name="code">TOOL</field>
+            <field name="description">Budget for tooling and equipment purchases</field>
+        </record>
+        
+        <record id="budget_category_quality" model="manufacturing.budget.category">
+            <field name="name">Quality Control</field>
+            <field name="code">QC</field>
+            <field name="description">Budget for quality control materials and testing</field>
+        </record>
+        
+        <record id="budget_category_safety" model="manufacturing.budget.category">
+            <field name="name">Safety & Compliance</field>
+            <field name="code">SAFETY</field>
+            <field name="description">Budget for safety equipment and compliance materials</field>
+        </record>
+        
+        <!-- Default AI Models Configuration -->
+        <record id="ai_model_demand_forecast" model="manufacturing.ai.model">
+            <field name="name">Demand Forecasting Model</field>
+            <field name="model_type">demand_forecast</field>
+            <field name="algorithm">linear_regression</field>
+            <field name="active">True</field>
+            <field name="training_data_days">90</field>
+            <field name="accuracy_threshold">0.85</field>
+        </record>
+        
+        <record id="ai_model_cost_prediction" model="manufacturing.ai.model">
+            <field name="name">Cost Prediction Model</field>
+            <field name="model_type">cost_prediction</field>
+            <field name="algorithm">random_forest</field>
+            <field name="active">True</field>
+            <field name="training_data_days">180</field>
+            <field name="accuracy_threshold">0.80</field>
+        </record>
+        
+        <record id="ai_model_vendor_recommendation" model="manufacturing.ai.model">
+            <field name="name">Vendor Recommendation Model</field>
+            <field name="model_type">vendor_recommendation</field>
+            <field name="algorithm">collaborative_filtering</field>
+            <field name="active">True</field>
+            <field name="training_data_days">365</field>
+            <field name="accuracy_threshold">0.75</field>
+        </record>
+        
+        <record id="ai_model_lead_time_prediction" model="manufacturing.ai.model">
+            <field name="name">Lead Time Prediction Model</field>
+            <field name="model_type">lead_time_prediction</field>
+            <field name="algorithm">gradient_boosting</field>
+            <field name="active">True</field>
+            <field name="training_data_days">120</field>
+            <field name="accuracy_threshold">0.82</field>
+        </record>
+        
+        <!-- Default Notification Templates -->
+        <record id="notification_template_submission" model="mail.template">
+            <field name="name">Requisition Submitted</field>
+            <field name="model_id" ref="model_manufacturing_material_requisition"/>
+            <field name="subject">Requisition ${object.name} Submitted for Approval</field>
+            <field name="body_html"><![CDATA[
+                <div style="margin: 0px; padding: 0px;">
+                    <p>Dear ${object.requested_by.name},</p>
+                    <p>Your material requisition <strong>${object.name}</strong> has been submitted for approval.</p>
+                    
+                    <h3>Requisition Details:</h3>
+                    <ul>
+                        <li><strong>Type:</strong> ${object.requisition_type}</li>
+                        <li><strong>Priority:</strong> ${object.priority}</li>
+                        <li><strong>Department:</strong> ${object.department_id.name}</li>
+                        <li><strong>Required Date:</strong> ${object.required_date}</li>
+                        <li><strong>Total Amount:</strong> ${object.total_amount} ${object.currency_id.name}</li>
+                    </ul>
+                    
+                    <p>You will be notified once the approval process is complete.</p>
+                    
+                    <p>Best regards,<br/>Manufacturing Team</p>
+                </div>
+            ]]></field>
+        </record>
+        
+        <record id="notification_template_approval" model="mail.template">
+            <field name="name">Requisition Approved</field>
+            <field name="model_id" ref="model_manufacturing_material_requisition"/>
+            <field name="subject">Requisition ${object.name} Approved</field>
+            <field name="body_html"><![CDATA[
+                <div style="margin: 0px; padding: 0px;">
+                    <p>Dear ${object.requested_by.name},</p>
+                    <p>Your material requisition <strong>${object.name}</strong> has been approved and is now being processed.</p>
+                    
+                    <h3>Next Steps:</h3>
+                    <ul>
+                        <li>Purchase orders will be created for items requiring procurement</li>
+                        <li>Internal transfers will be initiated for available inventory</li>
+                        <li>You will receive updates on delivery status</li>
+                    </ul>
+                    
+                    <p>Expected delivery date: ${object.expected_delivery_date}</p>
+                    
+                    <p>Best regards,<br/>Procurement Team</p>
+                </div>
+            ]]></field>
+        </record>
+        
+        <record id="notification_template_emergency" model="mail.template">
+            <field name="name">Emergency Requisition Alert</field>
+            <field name="model_id" ref="model_shop_floor_requisition"/>
+            <field name="subject">URGENT: Emergency Requisition ${object.name}</field>
+            <field name="body_html"><![CDATA[
+                <div style="margin: 0px; padding: 0px; color: #d32f2f;">
+                    <h2 style="color: #d32f2f;">🚨 EMERGENCY REQUISITION ALERT 🚨</h2>
+                    
+                    <p><strong>Machine:</strong> ${object.machine_id.name}</p>
+                    <p><strong>Operator:</strong> ${object.operator_id.name}</p>
+                    <p><strong>Production Impact:</strong> ${object.production_impact}</p>
+                    <p><strong>Estimated Downtime:</strong> ${object.estimated_downtime} hours</p>
+                    
+                    <h3>Required Materials:</h3>
+                    <ul>
+                        % for line in object.material_lines:
+                        <li>${line.product_id.name} - Qty: ${line.qty_required}</li>
+                        % endfor
+                    </ul>
+                    
+                    <p><strong>Immediate action required!</strong></p>
+                    
+                    <p>Manufacturing Operations</p>
+                </div>
+            ]]></field>
+        </record>
+        
+        <!-- Default Company Settings -->
+        <record id="default_company_settings" model="res.config.settings">
+            <field name="manufacturing_auto_approval_limit">1000.0</field>
+            <field name="manufacturing_emergency_notification">True</field>
+            <field name="manufacturing_ai_recommendations">True</field>
+            <field name="manufacturing_real_time_inventory">True</field>
+        </record>
+        
+        <!-- Default Stock Locations for Manufacturing -->
+        <record id="location_manufacturing_raw" model="stock.location">
+            <field name="name">Manufacturing Raw Materials</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+        <record id="location_manufacturing_wip" model="stock.location">
+            <field name="name">Work in Progress</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+        <record id="location_manufacturing_finished" model="stock.location">
+            <field name="name">Finished Goods</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+        <record id="location_maintenance_store" model="stock.location">
+            <field name="name">Maintenance Store</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+        <record id="location_quality_lab" model="stock.location">
+            <field name="name">Quality Control Lab</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+        <!-- Default Sequences -->
+        <record id="seq_manufacturing_requisition" model="ir.sequence">
+            <field name="name">Manufacturing Requisition</field>
+            <field name="code">manufacturing.material.requisition</field>
+            <field name="prefix">MR</field>
+            <field name="padding">5</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+        <record id="seq_shop_floor_requisition" model="ir.sequence">
+            <field name="name">Shop Floor Requisition</field>
+            <field name="code">shop.floor.requisition</field>
+            <field name="prefix">SF</field>
+            <field name="padding">5</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+        <record id="seq_emergency_requisition" model="ir.sequence">
+            <field name="name">Emergency Requisition</field>
+            <field name="code">emergency.requisition</field>
+            <field name="prefix">EM</field>
+            <field name="padding">5</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+    </data>
+</odoo> 
